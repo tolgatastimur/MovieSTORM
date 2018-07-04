@@ -52,4 +52,14 @@ dependencies {
 
     //indicator
     implementation 'me.relex:circleindicator:1.2.2@aar'
+
+    implementation 'com.github.markomilos:paginate:0.5.1'
+
+    implementation 'com.ogaclejapan.smarttablayout:library:1.6.1@aar'
+    //Optional: see how to use the utility.
+    implementation 'com.ogaclejapan.smarttablayout:utils-v4:1.6.1@aar'
+
+
+
+
 }

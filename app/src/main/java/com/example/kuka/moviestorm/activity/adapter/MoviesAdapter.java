@@ -9,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.kuka.moviestorm.R;
+import com.example.kuka.moviestorm.activity.activity.MainActivity;
+import com.example.kuka.moviestorm.activity.fragment.MovieDetailFragment;
 import com.example.kuka.moviestorm.activity.model.Movie;
 import com.squareup.picasso.Picasso;
 
@@ -32,14 +34,19 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
     @Override
     public void onBindViewHolder(MoviesAdapter.ViewHolder holder, int position) {
 
-        Movie article = movies.get(position);
-      //  holder.n_overview.setText( article.overview);
-       // holder.n_title.setText(article.title);
-      // holder.n_posterpath.setText(article.posterPath);
+        final Movie article = movies.get(position);
 
         Picasso.get()
                 .load("https://image.tmdb.org/t/p/w500/" + article.posterPath)
+                .resize(350,480)
                 .into(holder.n_image);
+
+        holder.n_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MainActivity.activity.setNewFragment(MovieDetailFragment.newInstance(article), R.id.mainFrame, "MovieDetailFragment", true, true, false, false);
+            }
+        });
     }
 
     @Override
@@ -48,14 +55,17 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
     }
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        private ImageView n_image;
+       // @BindView(R.id.movieTitle)
+        //TextView movieTitle;
+        public ImageView n_image;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
             n_image     = itemView.findViewById(R.id.moviePoster);
+            ButterKnife.bind(this,itemView);
 
         }
     }

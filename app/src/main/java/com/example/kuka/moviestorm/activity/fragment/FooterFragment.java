@@ -7,7 +7,6 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -52,17 +51,15 @@ public class FooterFragment extends Fragment {
                         MainActivity.activity.setNewFragment(new MovieNewsFragment(), R.id.contentFL, "", false, true, false, false);
                         break;
                     case R.id.bestMovies:
-                        MainActivity.activity.setNewFragment(new MovieFragment(), R.id.contentFL, "", true, true, false, false);
+                        MainActivity.activity.setNewFragment(new MovieFragment(), R.id.contentFL, "movieFragment", true, true, false, false);
                         break;
                     case R.id.watchList:
                         MainActivity.activity.setNewFragment(new WatchListFragment(), R.id.contentFL, "", false, false, false, false);
                         break;
                     case R.id.search:
-                        MainActivity.activity.setNewFragment(new AccountFragment(), R.id.contentFL, "", false, false, false, false);
+                        MainActivity.activity.setNewFragment(new SearchFragment(), R.id.contentFL, "", false, false, false, false);
                         break;
                 }
-                //final FragmentTransaction transaction = fragmentManager.beginTransaction();
-                //transaction.add(R.id.contentFL, fragment).commit();
                 return true;
             }
         });

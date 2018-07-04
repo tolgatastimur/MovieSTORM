@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void prepareTransactions() {
 
-        setNewFragment(new VizyonFragment(), R.id.contentFL, null, true, true, false, false);
+        setNewFragment(new VizyonFragment(), R.id.contentFL, null, false, false, false, false);
         setNewFragment(new FooterFragment(), R.id.footerContainer, null, false, true, false, false);
         fragmentManager.executePendingTransactions();
 

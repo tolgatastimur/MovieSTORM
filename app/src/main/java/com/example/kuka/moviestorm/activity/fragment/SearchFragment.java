@@ -10,11 +10,11 @@ import android.view.ViewGroup;
 
 import com.example.kuka.moviestorm.R;
 
-public class AccountFragment extends Fragment {
+public class SearchFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.fragment_account,container,false);
+        View view=inflater.inflate(R.layout.fragment_search,container,false);
         return view;
     }
 }

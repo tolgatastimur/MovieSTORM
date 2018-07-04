@@ -46,8 +46,6 @@ public class TopMovieFragment extends Fragment {
         return view;
     }
 
-
-
     public void populateMovies() {
         ProgressDialogMovieHelper.showCircularProgressDialogMovie();
         ServiceConnector.movieAPI.getTopRatedMovies("b155b3b83ec4d1cbb1e9576c41d00503", "tr").enqueue(new Callback<MoviesResponse>() {
@@ -55,15 +53,15 @@ public class TopMovieFragment extends Fragment {
             @Override
             public void onResponse(@NonNull Call<MoviesResponse> call, @NonNull Response<MoviesResponse> response) {
                 if (response != null) {
+                    ProgressDialogMovieHelper.dismiss();
                     moviesResponse = response.body();
                     adapter = new MoviesAdapter(moviesResponse.results);
                     lLayout = new GridLayoutManager(MainActivity.activity, 2);
-                    n_movieViewer.setHasFixedSize(true);
                     n_movieViewer.setLayoutManager(lLayout);
                     n_movieViewer.setAdapter(adapter);
-                    ProgressDialogMovieHelper.dismiss();
                 }
             }
+
             @Override
             public void onFailure(Call<MoviesResponse> call, Throwable t) {
                 Toast.makeText(getActivity().getApplicationContext(), "Error ", Toast.LENGTH_SHORT).show();

@@ -2,10 +2,11 @@ package com.example.kuka.moviestorm.activity.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Movie {
+public class Movie implements Serializable {
     @SerializedName("poster_path")
     public String posterPath;
 
@@ -19,7 +20,7 @@ public class Movie {
     public String releaseDate;
 
     @SerializedName("genre_ids")
-    public List<Integer> genreID=new ArrayList<Integer>();
+    public List<Integer> genreID = new ArrayList<Integer>();
 
     @SerializedName("id")
     public Integer id;
@@ -45,8 +46,8 @@ public class Movie {
     @SerializedName("video")
     public Boolean video;
 
-    @SerializedName("vote_avarage")
-    public Double voteAvarage;
+    @SerializedName("vote_average")
+    public Double voteAverage;
 
    /* public boolean isAdult() {
         return adult;
