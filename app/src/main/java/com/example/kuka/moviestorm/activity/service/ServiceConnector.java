@@ -12,13 +12,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 //import okhttp3.logging.HttpLoggingInterceptor;
 
-/**
- * Created by Ali on 01/09/16.
- */
+
 public class ServiceConnector {
 
     private static final String API_URL = "https://api.themoviedb.org/3/";
     public static MovieAPI movieAPI;
+    private static Retrofit retrofit = null;
 
 
     public static void init() {
@@ -41,6 +40,24 @@ public class ServiceConnector {
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
 
+
         movieAPI = retrofit.create(MovieAPI.class);
+    }
+
+    private static OkHttpClient buildClient() {
+        return new OkHttpClient
+                .Builder()
+                .addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+                .build();
+    }
+    public static Retrofit getClient() {
+        if (retrofit == null) {
+            retrofit = new Retrofit.Builder()
+                    .client(buildClient())
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .baseUrl("https://api.themoviedb.org/3/")
+                    .build();
+        }
+        return retrofit;
     }
 }

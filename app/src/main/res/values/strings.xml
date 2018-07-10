@@ -8,13 +8,14 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
     <string name="action_movie">Filmler</string>
-    <string name="action_news">Haberler</string>
+    <string name="action_news">Popüler </string>
     <string name="action_watchlist">Listem</string>
     <string name="action_ontheater">Vizyon</string>
     <string name="action_search">Arama</string>
     <string name="top_movies">En iyi filmler</string>
     <string name="header_categories">Kategoriler</string>
     <string name="next_program">Gelecek Program </string>
+    <string name="my_api_key">b155b3b83ec4d1cbb1e9576c41d00503</string>
 
 
 </resources>

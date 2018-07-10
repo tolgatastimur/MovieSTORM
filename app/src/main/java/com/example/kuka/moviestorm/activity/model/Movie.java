@@ -49,7 +49,21 @@ public class Movie implements Serializable {
     @SerializedName("vote_average")
     public Double voteAverage;
 
-   /* public boolean isAdult() {
+
+
+    @Override
+    public boolean equals(Object other){
+        if (other == null) return false;
+        if (other == this) return true;
+        if (!(other instanceof Movie))return false;
+        Movie otherMovie = (Movie) other;
+
+        return otherMovie.id.equals(this.id);
+    }
+
+
+
+    public boolean isAdult() {
         return adult;
     }
 
@@ -145,13 +159,7 @@ public class Movie implements Serializable {
         this.video = video;
     }
 
-    public Double getVoteAvarage() {
-        return voteAvarage;
-    }
 
-    public void setVoteAvarage(Double voteAvarage) {
-        this.voteAvarage = voteAvarage;
-    }
 
     public String getBaseImageUrl() {
         return baseImageUrl;
@@ -161,7 +169,7 @@ public class Movie implements Serializable {
         this.baseImageUrl = baseImageUrl;
     }
 
-    public Movie(String posterPath, boolean adult, String overview, String releaseDate, List<Integer> genreID, Integer id, String orginalTitle, String originsalLanguage, String title, String backdropPath, Double popularity, Integer voteCount, Boolean video, Double voteAvarage) {
+    public Movie() {
         this.posterPath = posterPath;
         this.adult = adult;
         this.overview = overview;
@@ -175,7 +183,6 @@ public class Movie implements Serializable {
         this.popularity = popularity;
         this.voteCount = voteCount;
         this.video = video;
-        this.voteAvarage = voteAvarage;
     }
 
     String baseImageUrl="https://image.tmdb.org/t/p/w500";
@@ -189,5 +196,6 @@ public class Movie implements Serializable {
 
     }
 
-*/
+
+
 }

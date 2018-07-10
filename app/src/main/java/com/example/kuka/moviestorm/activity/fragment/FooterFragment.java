@@ -48,7 +48,7 @@ public class FooterFragment extends Fragment {
                         MainActivity.activity.setNewFragment(new VizyonFragment(), R.id.contentFL, "", false, true, false, false);
                         break;
                     case R.id.movieNews:
-                        MainActivity.activity.setNewFragment(new MovieNewsFragment(), R.id.contentFL, "", false, true, false, false);
+                        MainActivity.activity.setNewFragment(new PopularMovieFragment(), R.id.contentFL, "", false, true, false, false);
                         break;
                     case R.id.bestMovies:
                         MainActivity.activity.setNewFragment(new MovieFragment(), R.id.contentFL, "movieFragment", true, true, false, false);

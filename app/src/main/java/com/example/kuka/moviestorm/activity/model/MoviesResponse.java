@@ -1,5 +1,6 @@
 package com.example.kuka.moviestorm.activity.model;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
@@ -7,20 +8,36 @@ import java.util.List;
 
 public class MoviesResponse {
     @SerializedName("page")
+    @Expose
     public int page;
 
+    public ArrayList<Movie> getResults() {
+        return results;
+    }
+
+    public void setResults(ArrayList<Movie> results) {
+        this.results = results;
+    }
+
     @SerializedName("results")
+    @Expose
     public ArrayList<Movie> results;
 
     @SerializedName("total_results")
+    @Expose
     public int total_results;
 
     @SerializedName("total_pages")
+    @Expose
     public int total_pages;
 
-    public List<Movie> getResults() {
-        return results;
-    }
+    @SerializedName("genres")
+    public ArrayList<Genre> genres;
+
+
+
+
+
 
 
    /* public int getPage() {

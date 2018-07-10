@@ -1,17 +1,26 @@
 package com.example.kuka.moviestorm.activity.activity;
 
 import android.annotation.SuppressLint;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.widget.Toast;
 
 import com.example.kuka.moviestorm.R;
 import com.example.kuka.moviestorm.activity.fragment.FooterFragment;
-import com.example.kuka.moviestorm.activity.fragment.MovieFragment;
 import com.example.kuka.moviestorm.activity.fragment.VizyonFragment;
+import com.example.kuka.moviestorm.activity.service.ServiceConnector;
+import com.example.kuka.moviestorm.activity.utilities.ProgressDialogMovieHelper;
+import com.orhanobut.hawk.Hawk;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
     public static MainActivity activity;
@@ -26,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         activity = this;
         inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
         fragmentManager = getSupportFragmentManager();
-
+        //Hawk.init(this).build();
         prepareTransactions();
     }
 

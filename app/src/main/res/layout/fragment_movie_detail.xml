@@ -37,7 +37,7 @@
                         android:src="@drawable/ic_action_name" />
 
                     <ImageButton
-                        android:id="@+id/movieLikeButton"
+                        android:id="@+id/movieAddFavButton"
                         android:layout_width="32dp"
                         android:layout_height="32dp"
                         android:layout_alignParentBottom="true"

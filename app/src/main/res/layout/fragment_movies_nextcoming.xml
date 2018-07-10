@@ -4,10 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/stormBackground">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Next Coming"
-        android:layout_centerInParent="true"
-        android:textColor="@color/colorWhite"/>
+  <android.support.v7.widget.RecyclerView
+      android:id="@+id/movieUpComingViewer"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
 </RelativeLayout>

@@ -3,7 +3,7 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimaryDark">@color/stormBottom</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
@@ -15,5 +15,9 @@
         <item name="android:windowNoTitle">true</item>   <!-- //this -->
     </style>
 
+    <style name="SearchViewTheme" parent="Widget.AppCompat.Light.SearchView">
 
+        <item name="android:textColorHint">@color/stormLine</item>
+        <item name="android:textColor">@color/stormLine</item>
+    </style>
 </resources>

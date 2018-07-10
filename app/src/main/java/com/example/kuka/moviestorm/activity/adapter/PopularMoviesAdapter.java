@@ -1,6 +1,5 @@
 package com.example.kuka.moviestorm.activity.adapter;
 
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,41 +14,44 @@ import com.example.kuka.moviestorm.activity.model.Movie;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder> {
+public class PopularMoviesAdapter extends RecyclerView.Adapter<PopularMoviesAdapter.ViewHolder> {
     private ArrayList<Movie> movies;
 
-    public MoviesAdapter(ArrayList<Movie> movies) {
+    public PopularMoviesAdapter(ArrayList<Movie> movies) {
         this.movies = movies;
     }
 
     @Override
-    public MoviesAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_movie_image, parent, false);
-        return new ViewHolder(view);
+    public PopularMoviesAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_popular_movies, parent, false);
+
+        return new PopularMoviesAdapter.ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(MoviesAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(PopularMoviesAdapter.ViewHolder holder, int position) {
 
         final Movie article = movies.get(position);
 
         Picasso.get()
                 .load("https://image.tmdb.org/t/p/w500/" + article.posterPath)
                 .resize(350, 480)
-                .into(holder.n_image);
+                .into(holder.moviePopularImage);
 
-        holder.n_image.setOnClickListener(new View.OnClickListener() {
+        holder.moviePopularImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MainActivity.activity.setNewFragment(MovieDetailFragment.newInstance(article), R.id.mainFrame, "MovieDetailFragment", true, true, false, false);
+                // MainActivity.activity.setNewFragment(MovieDetailFragment.newInstance(article), R.id.contentFL, "MovieDetailFragment", true, true, false, false);
             }
         });
+
+
     }
+
 
     @Override
     public int getItemCount() {
@@ -57,18 +59,14 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
     }
 
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
-        // @BindView(R.id.movieTitle)
-        //TextView movieTitle;
-        public ImageView n_image;
+        @BindView(R.id.moviePopularImage)
+        ImageView moviePopularImage;
 
         public ViewHolder(View itemView) {
             super(itemView);
-
-            n_image = itemView.findViewById(R.id.moviePoster);
             ButterKnife.bind(this, itemView);
-
         }
     }
 }

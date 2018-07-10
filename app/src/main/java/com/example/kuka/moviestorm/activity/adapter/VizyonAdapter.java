@@ -44,7 +44,7 @@ public class VizyonAdapter extends RecyclerView.Adapter<VizyonAdapter.ViewHolder
         final Movie article = movies.get(position);
         holder.movieTitle.setText(article.title.toUpperCase());
         holder.movieRating.setText("IMDB :" + String.valueOf(article.voteAverage) + "/10");
-        holder.movieReleaseDate.setText(article.releaseDate);
+        holder.movieReleaseDate.setText("Yatın Tarihi: "+article.releaseDate);
 
         Picasso.get()
                 .load("https://image.tmdb.org/t/p/w500/" + article.posterPath)
