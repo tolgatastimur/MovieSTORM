@@ -41,7 +41,6 @@ public class PopularMovieFragment extends Fragment {
     private static final int PAGE_START = 1;
     private boolean isLoading = false;
     private boolean isLastPage = false;
-    // limiting to 5 for this tutorial, since total pages in actual API is very large. Feel free to modify.
     private int TOTAL_PAGES = 5;
     private int currentPage = PAGE_START;
 
@@ -158,29 +157,4 @@ public class PopularMovieFragment extends Fragment {
                 "b155b3b83ec4d1cbb1e9576c41d00503","tr",currentPage
         );
     }
-//    public void populateVizyon() {
-//        ProgressDialogMovieHelper.showCircularProgressDialogMovie();
-//
-//
-//        ServiceConnector.movieAPI.getPopularMovies("b155b3b83ec4d1cbb1e9576c41d00503", "tr").enqueue(new Callback<MoviesResponse>() {
-//
-//            @Override
-//            public void onResponse(@NonNull Call<MoviesResponse> call, @NonNull Response<MoviesResponse> response) {
-//                if (response != null) {
-//                    ProgressDialogMovieHelper.dismiss();
-//                    moviesResponse = response.body();
-//                    ArrayList<Movie> results = moviesResponse.results;
-//                    popularMoviesAdapter = new PopularMoviesAdapter(results);
-//                    RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getContext(),2);
-//                    moviePopularViewer.setLayoutManager(mLayoutManager);
-//                    moviePopularViewer.setAdapter(popularMoviesAdapter);
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<MoviesResponse> call, Throwable t) {
-//                Toast.makeText(getActivity().getApplicationContext(), "Error ", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//    }
 }

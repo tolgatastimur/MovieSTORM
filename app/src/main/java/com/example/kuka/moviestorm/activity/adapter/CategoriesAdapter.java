@@ -1,7 +1,5 @@
 package com.example.kuka.moviestorm.activity.adapter;
 
-import android.net.Uri;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,16 +10,10 @@ import android.widget.TextView;
 import com.example.kuka.moviestorm.R;
 import com.example.kuka.moviestorm.activity.activity.MainActivity;
 import com.example.kuka.moviestorm.activity.fragment.MovieCategoriesDetailFragment;
-import com.example.kuka.moviestorm.activity.fragment.MovieDetailFragment;
 import com.example.kuka.moviestorm.activity.model.Genre;
 import com.squareup.picasso.Picasso;
 
-import java.io.File;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

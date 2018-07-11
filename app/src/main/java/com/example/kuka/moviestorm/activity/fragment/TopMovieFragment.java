@@ -157,26 +157,5 @@ public class TopMovieFragment extends Fragment {
         );
     }
 
-//    public void populateMovies() {
-//        ProgressDialogMovieHelper.showCircularProgressDialogMovie();
-//        ServiceConnector.movieAPI.getTopRatedMovies("b155b3b83ec4d1cbb1e9576c41d00503", "tr",1).enqueue(new Callback<MoviesResponse>() {
-//
-//            @Override
-//            public void onResponse(@NonNull Call<MoviesResponse> call, @NonNull Response<MoviesResponse> response) {
-//                if (response != null) {
-//                    ProgressDialogMovieHelper.dismiss();
-//                    moviesResponse = response.body();
-//                    adapter = new PopularMoviesAdapter(moviesResponse.results);
-//                    lLayout = new GridLayoutManager(MainActivity.activity, 2);
-//                    n_movieViewer.setLayoutManager(lLayout);
-//                    n_movieViewer.setAdapter(adapter);
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<MoviesResponse> call, Throwable t) {
-//                Toast.makeText(getActivity().getApplicationContext(), "Error ", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//    }
+
 }

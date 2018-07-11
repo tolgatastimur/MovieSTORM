@@ -43,7 +43,6 @@ public class MovieCategoriesDetailFragment extends Fragment {
     private static final int PAGE_START = 1;
     private boolean isLoading = false;
     private boolean isLastPage = false;
-    // limiting to 5 for this tutorial, since total pages in actual API is very large. Feel free to modify.
     private int TOTAL_PAGES = 5;
     private int currentPage = PAGE_START;
 
@@ -176,40 +175,7 @@ public class MovieCategoriesDetailFragment extends Fragment {
 
     private Call<MoviesResponse> callTopRatedMoviesApi() {
         return movieService.getMoviesByGenre(
-                "b155b3b83ec4d1cbb1e9576c41d00503","tr", "popularity.desc","false","false",currentPage,genre.id
+                "b155b3b83ec4d1cbb1e9576c41d00503", "tr", "popularity.desc", "false", "false", currentPage, genre.id
         );
     }
-
-
-
-
-
-//        public void populateMovieDetail() {
-//            ProgressDialogMovieHelper.showCircularProgressDialogMovie();
-//
-//
-//            ServiceConnector.movieAPI.getMoviesByGenre("b155b3b83ec4d1cbb1e9576c41d00503", "tr", "popularity.desc","false","false",1,genre.id).enqueue(new Callback<MoviesResponse>() {
-//
-//                @Override
-//                public void onResponse(@NonNull Call<MoviesResponse> call, @NonNull Response<MoviesResponse> response) {
-//                    if (response != null) {
-//                        ProgressDialogMovieHelper.dismiss();
-//                        moviesResponse = response.body();
-//                        ArrayList<Movie> results = moviesResponse.results;
-//                        moviesAdapter = new MoviesAdapter(results);
-//                        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getContext(),2);
-//                        movieDetailByGenre.setLayoutManager(mLayoutManager);
-//                        movieDetailByGenre.setAdapter(moviesAdapter);
-//                    }
-//                }
-//
-//                @Override
-//                public void onFailure(Call<MoviesResponse> call, Throwable t) {
-//                    Toast.makeText(getActivity().getApplicationContext(), "Error ", Toast.LENGTH_SHORT).show();
-//                }
-//            });
-//        }
-
-
-
 }

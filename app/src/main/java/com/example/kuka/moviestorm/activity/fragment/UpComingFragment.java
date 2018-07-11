@@ -147,29 +147,5 @@ public class UpComingFragment extends Fragment {
                 "b155b3b83ec4d1cbb1e9576c41d00503","tr",currentPage,"tr"
         );
     }
-//    public void populateVizyon() {
-//        ProgressDialogMovieHelper.showCircularProgressDialogMovie();
-//
-//
-//        ServiceConnector.movieAPI.getNextProgram("b155b3b83ec4d1cbb1e9576c41d00503", "en",5).enqueue(new Callback<MoviesResponse>() {
-//
-//            @Override
-//            public void onResponse(@NonNull Call<MoviesResponse> call, @NonNull Response<MoviesResponse> response) {
-//                if (response != null) {
-//                    ProgressDialogMovieHelper.dismiss();
-//                    moviesResponse = response.body();
-//                    ArrayList<Movie> results = moviesResponse.results;
-//                    upComingAdapter = new UpComingAdapter(results);
-//                    RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(MainActivity.activity, 2);
-//                    movieUpComingViewer.setLayoutManager(mLayoutManager);
-//                    movieUpComingViewer.setAdapter(upComingAdapter);
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<MoviesResponse> call, Throwable t) {
-//                Toast.makeText(getActivity().getApplicationContext(), "Error ", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//    }
+
 }
