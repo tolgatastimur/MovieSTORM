@@ -60,7 +60,6 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Vi
         holder.movieCategoryText.setText((CharSequence) article.name);
 
         if (position < imagePath.length) {
-            // holder.movieCategoryImage.setImageResource(imagePath[position]);
             Picasso.get()
                     .load(imagePath[position])
                     .fit()

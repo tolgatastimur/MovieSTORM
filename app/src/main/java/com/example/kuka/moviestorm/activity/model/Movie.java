@@ -50,17 +50,15 @@ public class Movie implements Serializable {
     public Double voteAverage;
 
 
-
     @Override
-    public boolean equals(Object other){
+    public boolean equals(Object other) {
         if (other == null) return false;
         if (other == this) return true;
-        if (!(other instanceof Movie))return false;
+        if (!(other instanceof Movie)) return false;
         Movie otherMovie = (Movie) other;
 
         return otherMovie.id.equals(this.id);
     }
-
 
 
     public boolean isAdult() {
@@ -160,7 +158,6 @@ public class Movie implements Serializable {
     }
 
 
-
     public String getBaseImageUrl() {
         return baseImageUrl;
     }
@@ -185,17 +182,16 @@ public class Movie implements Serializable {
         this.video = video;
     }
 
-    String baseImageUrl="https://image.tmdb.org/t/p/w500";
+    String baseImageUrl = "https://image.tmdb.org/t/p/w500";
 
     public String getPosterPath() {
-        return "https://image.tmdb.org/t/p/w500"+posterPath;
+        return "https://image.tmdb.org/t/p/w500" + posterPath;
     }
 
-    public void setPosterPath(String posterPath){
-        this.posterPath=posterPath;
+    public void setPosterPath(String posterPath) {
+        this.posterPath = posterPath;
 
     }
-
 
 
 }

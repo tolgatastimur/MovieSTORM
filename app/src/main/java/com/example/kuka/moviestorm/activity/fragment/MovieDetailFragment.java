@@ -1,11 +1,10 @@
 package com.example.kuka.moviestorm.activity.fragment;
 
 import android.content.Context;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,20 +14,13 @@ import android.widget.TextView;
 
 import com.example.kuka.moviestorm.R;
 import com.example.kuka.moviestorm.activity.activity.MainActivity;
-import com.example.kuka.moviestorm.activity.model.FavoriteItem;
 import com.example.kuka.moviestorm.activity.model.Movie;
 
-import com.example.kuka.moviestorm.activity.model.MovieList;
-import com.example.kuka.moviestorm.activity.model.MyFavoriteItems;
 import com.example.kuka.moviestorm.activity.utilities.FavListHelper;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.orhanobut.hawk.Hawk;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -56,8 +48,8 @@ public class MovieDetailFragment extends Fragment {
     Movie movie;
     Context context;
 
-    DatabaseReference databaseReference;
-
+    ArrayList<String> genrelist;
+    ArrayList<Integer> genrelistID;
 
     public static MovieDetailFragment newInstance(Movie article) {
 
@@ -76,9 +68,9 @@ public class MovieDetailFragment extends Fragment {
         ButterKnife.bind(this, view);
         movie = (Movie) getArguments().getSerializable(ARTICLE);
         context = MainActivity.activity;
-        databaseReference = FirebaseDatabase.getInstance().getReference("Movies");
+        genreHelper();
         populateMovieDetail();
-        if (FavListHelper.isAlreadyInFavList(movie)){
+        if (FavListHelper.isAlreadyInFavList(movie)) {
             movieAddFavButton.setBackgroundResource(R.drawable.ic_favorite_fill);
         }
 
@@ -96,23 +88,71 @@ public class MovieDetailFragment extends Fragment {
         movieDetailReleaseDate.setText(movie.releaseDate);
         movieDetailOriginalLanguage.setText(movie.originsalLanguage);
         movieDetailIMBDB.setText(String.valueOf(movie.voteAverage) + "/10");
+        movieDetailCategory.setText(String.valueOf(genrelist));
     }
 
     @OnClick(R.id.movieAddFavButton)
     public void likeButton() {
-        if (FavListHelper.isAlreadyInFavList(movie)){
+        if (FavListHelper.isAlreadyInFavList(movie)) {
             FavListHelper.removeFromFav(movie);
             movieAddFavButton.setBackgroundResource(R.drawable.ic_favorite);
 
-        }
-
-        else {
+        } else {
             FavListHelper.addToFav(movie);
             movieAddFavButton.setBackgroundResource(R.drawable.ic_favorite_fill);
 
         }
     }
+
+    public void genreHelper() {
+        genrelist = new ArrayList<>();
+        Log.e("genreid", String.valueOf(movie.genreID));
+        if (movie.genreID.contains(28)) {
+            genrelist.add("Aksiyon");
+        }if (movie.genreID.contains(12)) {
+            genrelist.add("Macera");
+        }if (movie.genreID.contains(16)) {
+            genrelist.add("Animasyon");
+        }if (movie.genreID.contains(35)) {
+            genrelist.add("Komedi");
+        }if (movie.genreID.contains(80)) {
+            genrelist.add("Suç");
+        }if (movie.genreID.contains(99)) {
+            genrelist.add("Belgesel");
+        }if (movie.genreID.contains(18)) {
+            genrelist.add("Dram");
+        }if (movie.genreID.contains(10751)) {
+            genrelist.add("Aile");
+        }if (movie.genreID.contains(14)) {
+            genrelist.add("Fantastik");
+        }if (movie.genreID.contains(36)) {
+            genrelist.add("Tarih");
+        }if (movie.genreID.contains(27)) {
+            genrelist.add("korku");
+        }if (movie.genreID.contains(10402)) {
+            genrelist.add("Müzik");
+        }if (movie.genreID.contains(9648)) {
+            genrelist.add("Gizem");
+        }if (movie.genreID.contains(10749)) {
+            genrelist.add("Romantik");
+        }if (movie.genreID.contains(878)) {
+            genrelist.add("Bilim-Kurgu");
+        }if (movie.genreID.contains(10770)) {
+            genrelist.add("TV");
+        }if (movie.genreID.contains(53)) {
+            genrelist.add("Gerilim");
+        }if (movie.genreID.contains(10752)) {
+            genrelist.add("Savaş");
+        }if (movie.genreID.contains(37)) {
+            genrelist.add("Vahşi Batı");
+        }
+
+        Log.e("genreittitle==", String.valueOf(genrelist));
+
+    }
 }
+
+
 
 
 
