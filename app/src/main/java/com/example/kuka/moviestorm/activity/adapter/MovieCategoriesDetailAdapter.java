@@ -27,7 +27,7 @@ import butterknife.ButterKnife;
  * Created by delaroy on 12/5/17.
  */
 
-public class PaginationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class MovieCategoriesDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private static final int ITEM = 0;
     private static final int LOADING = 1;
@@ -37,7 +37,7 @@ public class PaginationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     private boolean isLoadingAdded = false;
 
-    public PaginationAdapter(Context context) {
+    public MovieCategoriesDetailAdapter(Context context) {
         this.context = context;
         movieResults = new ArrayList<>();
     }
@@ -82,25 +82,21 @@ public class PaginationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         switch (getItemViewType(position)) {
             case ITEM:
                 final MovieVH movieVH = (MovieVH) holder;
-                ((MovieVH) holder).movieTitle.setText(article.title.toUpperCase());
-                ((MovieVH) holder).movieRating.setText("IMDB :" + String.valueOf(article.voteAverage) + "/10");
-                ((MovieVH) holder).movieReleaseDate.setText("Yatın Tarihi: " + article.releaseDate);
 
                 Picasso.get()
                         .load("https://image.tmdb.org/t/p/w500/" + article.posterPath)
                         .resize(350, 480)
-                        .into(((MovieVH) holder).movieImage);
+                        .into(((MovieVH) holder).moviePoster);
 
-                ((MovieVH) holder).movieImage.setOnClickListener(new View.OnClickListener() {
+                ((MovieVH) holder).moviePoster.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        MainActivity.activity.setNewFragment(MovieDetailFragment.newInstance(article), R.id.contentFL, "MovieDetailFragment", true, true, false, false);
+                        MainActivity.activity.setNewFragment(MovieDetailFragment.newInstance(article), R.id.mainFrame, "MovieDetailFragment", true, false, false, false);
                     }
                 });
                 break;
 
             case LOADING:
-//                Do nothing
                 break;
 
 
@@ -178,13 +174,7 @@ public class PaginationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     protected class MovieVH extends RecyclerView.ViewHolder {
 
         @BindView(R.id.moviePoster)
-        ImageView movieImage;
-        @BindView(R.id.movieTitle)
-        TextView movieTitle;
-        @BindView(R.id.movieRating)
-        TextView movieRating;
-        @BindView(R.id.movieReleaseDate)
-        TextView movieReleaseDate;
+        ImageView moviePoster;
 
         public MovieVH(View itemView) {
             super(itemView);

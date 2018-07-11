@@ -7,7 +7,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,7 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.kuka.moviestorm.R;
-import com.example.kuka.moviestorm.activity.adapter.PopularMoviesAdapter;
+import com.example.kuka.moviestorm.activity.adapter.UpComingAdapter;
 import com.example.kuka.moviestorm.activity.model.Movie;
 import com.example.kuka.moviestorm.activity.model.MoviesResponse;
 import com.example.kuka.moviestorm.activity.service.MovieAPI;
@@ -30,14 +29,12 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class PopularMovieFragment extends Fragment {
-    @BindView(R.id.moviePopularViewer)
-    RecyclerView moviePopularViewer;
-
+public class UpComingFragment extends Fragment {
+    UpComingAdapter upComingAdapter;
     private static final String TAG = "MainActivity";
 
-    PopularMoviesAdapter adapter;
-    LinearLayoutManager linearLayoutManager;
+    private GridLayoutManager gridLayoutManager;
+
     private static final int PAGE_START = 1;
     private boolean isLoading = false;
     private boolean isLastPage = false;
@@ -46,26 +43,24 @@ public class PopularMovieFragment extends Fragment {
     private int currentPage = PAGE_START;
 
     private MovieAPI movieService;
+    @BindView(R.id.movieUpComingViewer)
+    RecyclerView movieUpComingViewer;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.fragment_popular_movies,container,false);
+        View view=inflater.inflate(R.layout.fragment_movies_nextcoming,container,false);
         ButterKnife.bind(this,view);
-        adapter = new PopularMoviesAdapter(getContext());
-
+        upComingAdapter=new UpComingAdapter(getContext());
         populatePage();
         return view;
     }
-
     private void populatePage(){
-        linearLayoutManager = new GridLayoutManager(getContext(),2);
-        moviePopularViewer.setLayoutManager(linearLayoutManager);
+        gridLayoutManager = new GridLayoutManager(getActivity().getApplicationContext(),2);
+        movieUpComingViewer.setLayoutManager(gridLayoutManager);
+        movieUpComingViewer.setItemAnimator(new DefaultItemAnimator());
+        movieUpComingViewer.setAdapter(upComingAdapter);
 
-        moviePopularViewer.setItemAnimator(new DefaultItemAnimator());
-
-        moviePopularViewer.setAdapter(adapter);
-
-        moviePopularViewer.addOnScrollListener(new PaginationScrollListener(linearLayoutManager) {
+        movieUpComingViewer.addOnScrollListener(new PaginationScrollListener(gridLayoutManager) {
             @Override
             protected void loadMoreItems() {
                 isLoading = true;
@@ -95,12 +90,8 @@ public class PopularMovieFragment extends Fragment {
                 return isLoading;
             }
         });
-
-        //init service and load data
         movieService = ServiceConnector.getClient().create(MovieAPI.class);
-
         loadFirstPage();
-
     }
 
     private void loadFirstPage() {
@@ -109,12 +100,10 @@ public class PopularMovieFragment extends Fragment {
         callTopRatedMoviesApi().enqueue(new Callback<MoviesResponse>() {
             @Override
             public void onResponse(Call<MoviesResponse> call, Response<MoviesResponse> response) {
-                // Got data. Send it to adapter
-
                 List<Movie> results = fetchResults(response);
-                adapter.addAll(results);
+                upComingAdapter.addAll(results);
 
-                if (currentPage <= TOTAL_PAGES) adapter.addLoadingFooter();
+                if (currentPage <= TOTAL_PAGES) upComingAdapter.addLoadingFooter();
                 else isLastPage = true;
             }
 
@@ -138,13 +127,13 @@ public class PopularMovieFragment extends Fragment {
         callTopRatedMoviesApi().enqueue(new Callback<MoviesResponse>() {
             @Override
             public void onResponse(Call<MoviesResponse> call, Response<MoviesResponse> response) {
-                adapter.removeLoadingFooter();
+                upComingAdapter.removeLoadingFooter();
                 isLoading = false;
 
                 List<Movie> results = fetchResults(response);
-                adapter.addAll(results);
+                upComingAdapter.addAll(results);
 
-                if (currentPage != TOTAL_PAGES) adapter.addLoadingFooter();
+                if (currentPage != TOTAL_PAGES) upComingAdapter.addLoadingFooter();
                 else isLastPage = true;
             }
 
@@ -154,15 +143,15 @@ public class PopularMovieFragment extends Fragment {
         });
     }
     private Call<MoviesResponse> callTopRatedMoviesApi() {
-        return movieService.getPopularMovies(
-                "b155b3b83ec4d1cbb1e9576c41d00503","tr",currentPage
+        return movieService.getNextProgram(
+                "b155b3b83ec4d1cbb1e9576c41d00503","tr",currentPage,"tr"
         );
     }
 //    public void populateVizyon() {
 //        ProgressDialogMovieHelper.showCircularProgressDialogMovie();
 //
 //
-//        ServiceConnector.movieAPI.getPopularMovies("b155b3b83ec4d1cbb1e9576c41d00503", "tr").enqueue(new Callback<MoviesResponse>() {
+//        ServiceConnector.movieAPI.getNextProgram("b155b3b83ec4d1cbb1e9576c41d00503", "en",5).enqueue(new Callback<MoviesResponse>() {
 //
 //            @Override
 //            public void onResponse(@NonNull Call<MoviesResponse> call, @NonNull Response<MoviesResponse> response) {
@@ -170,10 +159,10 @@ public class PopularMovieFragment extends Fragment {
 //                    ProgressDialogMovieHelper.dismiss();
 //                    moviesResponse = response.body();
 //                    ArrayList<Movie> results = moviesResponse.results;
-//                    popularMoviesAdapter = new PopularMoviesAdapter(results);
-//                    RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getContext(),2);
-//                    moviePopularViewer.setLayoutManager(mLayoutManager);
-//                    moviePopularViewer.setAdapter(popularMoviesAdapter);
+//                    upComingAdapter = new UpComingAdapter(results);
+//                    RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(MainActivity.activity, 2);
+//                    movieUpComingViewer.setLayoutManager(mLayoutManager);
+//                    movieUpComingViewer.setAdapter(upComingAdapter);
 //                }
 //            }
 //

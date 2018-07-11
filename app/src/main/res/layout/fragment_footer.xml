@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    >
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/bottom_navigation"
@@ -13,5 +14,6 @@
         app:itemBackground="@color/stormBottom"
         app:itemIconTint="@drawable/color_selector"
         app:itemTextColor="@drawable/color_selector"
-        app:menu="@menu/row_bottom_navigation"/>
+        app:menu="@menu/row_bottom_navigation"
+        />
 </LinearLayout>

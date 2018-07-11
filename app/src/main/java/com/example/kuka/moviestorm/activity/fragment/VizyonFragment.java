@@ -11,10 +11,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 
 import com.example.kuka.moviestorm.R;
-import com.example.kuka.moviestorm.activity.adapter.PaginationAdapter;
 import com.example.kuka.moviestorm.activity.adapter.VizyonAdapter;
 import com.example.kuka.moviestorm.activity.model.Movie;
 import com.example.kuka.moviestorm.activity.model.MoviesResponse;
@@ -31,19 +29,12 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class VizyonFragment extends Fragment {
-//    private MoviesResponse moviesResponse;
-//    public VizyonAdapter adapter;
-//    @BindView(R.id.vizyonViewer)
-//    RecyclerView vizyonViewer;
-//
+
 
     private static final String TAG = "MainActivity";
 
-    PaginationAdapter adapter;
+    VizyonAdapter adapter;
     LinearLayoutManager linearLayoutManager;
-
-
-    ProgressBar progressBar;
 
     private static final int PAGE_START = 1;
     private boolean isLoading = false;
@@ -63,11 +54,14 @@ public class VizyonFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_movies_vizyon, container, false);
         ButterKnife.bind(this, view);
-        adapter = new PaginationAdapter(getContext());
+        adapter = new VizyonAdapter(getContext());
 
-        // rv.setLayoutManager(new GridLayoutManager(this, 2));
-        //linearLayoutManager = new GridLayoutManager(this, 2);
+        populatePage();
 
+        return view;
+    }
+
+    private void populatePage(){
         linearLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         rv.setLayoutManager(linearLayoutManager);
 
@@ -111,9 +105,7 @@ public class VizyonFragment extends Fragment {
 
         loadFirstPage();
 
-        return view;
     }
-
     private void loadFirstPage() {
         Log.d(TAG, "loadFirstPage: ");
 
@@ -138,10 +130,6 @@ public class VizyonFragment extends Fragment {
 
     }
 
-    /**
-     * @param response extracts List<{@link Movie>} from response
-     * @return
-     */
     private List<Movie> fetchResults(Response<MoviesResponse> response) {
         MoviesResponse topRatedMovies = response.body();
         return topRatedMovies.getResults();
@@ -168,47 +156,15 @@ public class VizyonFragment extends Fragment {
                 t.printStackTrace(); }
         });
     }
-
-
-    /**
-     * Performs a Retrofit call to the top rated movies API.
-     * Same API call for Pagination.
-     * As {@link #currentPage} will be incremented automatically
-     * by @{@link PaginationScrollListener} to load next page.
-     */
     private Call<MoviesResponse> callTopRatedMoviesApi() {
         return movieService.getNowPlayingMovies(
-                "b155b3b83ec4d1cbb1e9576c41d00503","tr",currentPage
+                "b155b3b83ec4d1cbb1e9576c41d00503","tr",currentPage,"tr"
         );
     }
 
 
 }
 
-//    public void populateVizyon() {
-//        ProgressDialogMovieHelper.showCircularProgressDialogMovie();
-//
-//
-//        ServiceConnector.movieAPI.getNowPlayingMovies("b155b3b83ec4d1cbb1e9576c41d00503", "tr", PAGE_START).enqueue(new Callback<MoviesResponse>() {
-//
-//            @Override
-//            public void onResponse(@NonNull Call<MoviesResponse> call, @NonNull Response<MoviesResponse> response) {
-//                if (response != null) {
-//                    ProgressDialogMovieHelper.dismiss();
-//                    moviesResponse = response.body();
-//                    ArrayList<Movie> results = moviesResponse.results;
-//                    adapter = new VizyonAdapter(results);
-//                    RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
-//                    vizyonViewer.setLayoutManager(mLayoutManager);
-//                    vizyonViewer.setAdapter(adapter);
-//                }
-//            }
-//            @Override
-//            public void onFailure(Call<MoviesResponse> call, Throwable t) {
-//                Toast.makeText(getActivity().getApplicationContext(), "Error ", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//    }
 
 
 

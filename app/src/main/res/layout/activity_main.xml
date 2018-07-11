@@ -6,7 +6,8 @@
     android:id="@+id/windowFL"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.activity.MainActivity">
+    tools:context=".activity.activity.MainActivity"
+    android:fitsSystemWindows="true">
 
     <FrameLayout
         android:id="@+id/mainFrame"
@@ -43,7 +44,8 @@
             <FrameLayout
                 android:id="@+id/footerContainer"
                 android:layout_width="fill_parent"
-                android:layout_height="50dp" />
+                android:layout_height="50dp"
+                android:isScrollContainer="false"/>
 
         </LinearLayout>
     </FrameLayout>

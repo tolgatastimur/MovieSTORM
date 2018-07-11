@@ -21,7 +21,9 @@ import com.orhanobut.hawk.Hawk;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
+/*
+Created by tolga taştimur at 07/2018
+*/
 public class MainActivity extends AppCompatActivity {
     public static MainActivity activity;
     public static LayoutInflater inflater;

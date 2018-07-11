@@ -30,8 +30,25 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Vi
     private ArrayList<Genre> genres;
 
     public Integer[] imagePath = {
-            R.drawable.adventure_image,
-            R.drawable.action_image
+            R.drawable.action_image,
+            R.drawable.adventura_image,
+            R.drawable.animation_image,
+            R.drawable.comedy_poster,
+            R.drawable.crime_image,
+            R.drawable.documentary_image,
+            R.drawable.drama_image,
+            R.drawable.family_image,
+            R.drawable.fantasy_image,
+            R.drawable.history_image,
+            R.drawable.scary_image,
+            R.drawable.music_image,
+            R.drawable.mistery_image,
+            R.drawable.romance_image,
+            R.drawable.sci_fi_image,
+            R.drawable.tv_movies_image,
+            R.drawable.thriller_image,
+            R.drawable.war_image,
+            R.drawable.western_image,
     };
 
 
@@ -61,7 +78,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Vi
         holder.movieCategoryText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MainActivity.activity.setNewFragment(MovieCategoriesDetailFragment.newInstance(article), R.id.mainFrame, "", true, true, false, false);
+                MainActivity.activity.setNewFragment(MovieCategoriesDetailFragment.newInstance(article), R.id.mainFrame, "", true, false, false, false);
 
             }
         });

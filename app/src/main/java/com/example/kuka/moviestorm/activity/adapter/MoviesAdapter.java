@@ -58,9 +58,6 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
 
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-
-        // @BindView(R.id.movieTitle)
-        //TextView movieTitle;
         public ImageView n_image;
 
         public ViewHolder(View itemView) {
