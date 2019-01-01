@@ -40,6 +40,9 @@ public class MoviesResponse {
 
 
 
+
+
+
    /* public int getPage() {
         return page;
     }

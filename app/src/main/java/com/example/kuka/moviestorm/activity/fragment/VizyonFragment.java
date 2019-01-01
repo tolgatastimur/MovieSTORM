@@ -40,7 +40,7 @@ public class VizyonFragment extends Fragment {
     private boolean isLoading = false;
     private boolean isLastPage = false;
     // limiting to 5 for this tutorial, since total pages in actual API is very large. Feel free to modify.
-    private int TOTAL_PAGES = 5;
+    private int TOTAL_PAGES = 7;
     private int currentPage = PAGE_START;
 
     private MovieAPI movieService;

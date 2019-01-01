@@ -59,6 +59,9 @@ dependencies {
     //Optional: see how to use the utility.
     implementation 'com.ogaclejapan.smarttablayout:utils-v4:1.6.1@aar'
     implementation "com.orhanobut:hawk:2.0.1"
+    //floating text button
+    implementation 'com.github.dimorinny:floating-text-button:0.0.4'
+
 
 
 }

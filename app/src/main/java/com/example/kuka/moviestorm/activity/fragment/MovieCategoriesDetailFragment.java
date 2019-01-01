@@ -114,8 +114,6 @@ public class MovieCategoriesDetailFragment extends Fragment {
                 return isLoading;
             }
         });
-
-        //init service and load data
         movieService = ServiceConnector.getClient().create(MovieAPI.class);
 
         loadFirstPage();
@@ -146,10 +144,7 @@ public class MovieCategoriesDetailFragment extends Fragment {
 
     }
 
-    private List<Movie> fetchResults(Response<MoviesResponse> response) {
-        MoviesResponse topRatedMovies = response.body();
-        return topRatedMovies.getResults();
-    }
+
 
     private void loadNextPage() {
         Log.d(TAG, "loadNextPage: " + currentPage);
@@ -173,6 +168,11 @@ public class MovieCategoriesDetailFragment extends Fragment {
         });
     }
 
+
+    private List<Movie> fetchResults(Response<MoviesResponse> response) {
+        MoviesResponse topRatedMovies = response.body();
+        return topRatedMovies.getResults();
+    }
     private Call<MoviesResponse> callTopRatedMoviesApi() {
         return movieService.getMoviesByGenre(
                 "b155b3b83ec4d1cbb1e9576c41d00503", "tr", "popularity.desc", "false", "false", currentPage, genre.id

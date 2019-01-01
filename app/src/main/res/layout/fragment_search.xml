@@ -22,6 +22,9 @@
            android:textColor="@color/stormLine"
            android:paddingLeft="20dp"
            android:background="@color/stormBottom"
+           android:imeOptions="actionDone"
+           android:singleLine="true"
+           android:maxLines="1"
            />
        <Button
            android:id="@+id/movieSearchButton"
@@ -32,11 +35,15 @@
            android:drawableLeft="@drawable/ic_search" />
    </LinearLayout>
 
-
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/searchViewLayout">
     <android.support.v7.widget.RecyclerView
         android:id="@+id/movieSearchViewer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/searchViewLayout"/>
+    </FrameLayout>
 
 </RelativeLayout>

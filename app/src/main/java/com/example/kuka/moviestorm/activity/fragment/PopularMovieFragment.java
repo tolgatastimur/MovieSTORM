@@ -70,7 +70,6 @@ public class PopularMovieFragment extends Fragment {
                 isLoading = true;
                 currentPage += 1;
 
-                // mocking network delay for API call
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -94,8 +93,6 @@ public class PopularMovieFragment extends Fragment {
                 return isLoading;
             }
         });
-
-        //init service and load data
         movieService = ServiceConnector.getClient().create(MovieAPI.class);
 
         loadFirstPage();
@@ -120,7 +117,6 @@ public class PopularMovieFragment extends Fragment {
             @Override
             public void onFailure(Call<MoviesResponse> call, Throwable t) {
                 t.printStackTrace();
-
             }
         });
 

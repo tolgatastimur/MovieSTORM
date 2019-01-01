@@ -47,87 +47,86 @@ public class SearchFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_search, container, false);
-        ButterKnife.bind(this,view);
+        ButterKnife.bind(this, view);
         search();
         return view;
     }
-public void search(){
-    movieSearchText.addTextChangedListener(new TextWatcher() {
 
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-        }
-
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            // put a debug statement to check
-            if(movieSearchText.getText().length()!=0){
-                ProgressDialogMovieHelper.showCircularProgressDialogMovie();
-
-
-                ServiceConnector.movieAPI.getSearch("b155b3b83ec4d1cbb1e9576c41d00503", "tr", movieSearchText.getText(), 1).enqueue(new Callback<MoviesResponse>() {
-
-                    @Override
-                    public void onResponse(@NonNull Call<MoviesResponse> call, @NonNull Response<MoviesResponse> response) {
-                        if (response != null) {
-                            ProgressDialogMovieHelper.dismiss();
-                            moviesResponse = response.body();
-                            ArrayList<Movie> results = moviesResponse.results;
-                            moviesAdapter = new MoviesAdapter(results);
-                            RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getContext(), 2);
-                            movieSearchViewer.setLayoutManager(mLayoutManager);
-                            movieSearchViewer.setAdapter(moviesAdapter);
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<MoviesResponse> call, Throwable t) {
-                        Toast.makeText(getActivity().getApplicationContext(), "Error ", Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
-            else{
-                Toast.makeText(MainActivity.activity, "Arama alanı boş.", Toast.LENGTH_SHORT).show();
-            }
-        }
-
-        @Override
-        public void afterTextChanged(Editable s) {
-
-        }
-
-
-
-    });}
-    @OnClick(R.id.movieSearchButton)
-    public void populateVizyon() {
-        if(movieSearchText.getText().length()!=0){
-        ProgressDialogMovieHelper.showCircularProgressDialogMovie();
-
-
-        ServiceConnector.movieAPI.getSearch("b155b3b83ec4d1cbb1e9576c41d00503", "tr", movieSearchText.getText(), 1).enqueue(new Callback<MoviesResponse>() {
+    public void search() {
+        movieSearchText.addTextChangedListener(new TextWatcher() {
 
             @Override
-            public void onResponse(@NonNull Call<MoviesResponse> call, @NonNull Response<MoviesResponse> response) {
-                if (response != null) {
-                    ProgressDialogMovieHelper.dismiss();
-                    moviesResponse = response.body();
-                    ArrayList<Movie> results = moviesResponse.results;
-                    moviesAdapter = new MoviesAdapter(results);
-                    RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getContext(), 2);
-                    movieSearchViewer.setLayoutManager(mLayoutManager);
-                    movieSearchViewer.setAdapter(moviesAdapter);
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                if (movieSearchText.getText().length() != 0) {
+                    ProgressDialogMovieHelper.showCircularProgressDialogMovie();
+
+
+                    ServiceConnector.movieAPI.getSearch("b155b3b83ec4d1cbb1e9576c41d00503", "tr", movieSearchText.getText(), 1).enqueue(new Callback<MoviesResponse>() {
+
+                        @Override
+                        public void onResponse(@NonNull Call<MoviesResponse> call, @NonNull Response<MoviesResponse> response) {
+                            if (response != null) {
+                                ProgressDialogMovieHelper.dismiss();
+                                moviesResponse = response.body();
+                                ArrayList<Movie> results = moviesResponse.results;
+                                moviesAdapter = new MoviesAdapter(results);
+                                RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getContext(), 2);
+                                movieSearchViewer.setLayoutManager(mLayoutManager);
+                                movieSearchViewer.setAdapter(moviesAdapter);
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<MoviesResponse> call, Throwable t) {
+                            Toast.makeText(getActivity().getApplicationContext(), "Error ", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                } else {
+                    Toast.makeText(MainActivity.activity, "Arama alanı boş.", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
-            public void onFailure(Call<MoviesResponse> call, Throwable t) {
-                Toast.makeText(getActivity().getApplicationContext(), "Error ", Toast.LENGTH_SHORT).show();
+            public void afterTextChanged(Editable s) {
+
             }
+
+
         });
     }
-    else{
+
+    @OnClick(R.id.movieSearchButton)
+    public void populateVizyon() {
+        if (movieSearchText.getText().length() != 0) {
+            ProgressDialogMovieHelper.showCircularProgressDialogMovie();
+
+
+            ServiceConnector.movieAPI.getSearch("b155b3b83ec4d1cbb1e9576c41d00503", "tr", movieSearchText.getText(), 1).enqueue(new Callback<MoviesResponse>() {
+
+                @Override
+                public void onResponse(@NonNull Call<MoviesResponse> call, @NonNull Response<MoviesResponse> response) {
+                    if (response != null) {
+                        ProgressDialogMovieHelper.dismiss();
+                        moviesResponse = response.body();
+                        ArrayList<Movie> results = moviesResponse.results;
+                        moviesAdapter = new MoviesAdapter(results);
+                        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getContext(), 2);
+                        movieSearchViewer.setLayoutManager(mLayoutManager);
+                        movieSearchViewer.setAdapter(moviesAdapter);
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<MoviesResponse> call, Throwable t) {
+                    Toast.makeText(getActivity().getApplicationContext(), "Error ", Toast.LENGTH_SHORT).show();
+                }
+            });
+        } else {
             Toast.makeText(MainActivity.activity, "Arama alanı boş.", Toast.LENGTH_SHORT).show();
         }
     }

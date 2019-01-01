@@ -1,6 +1,8 @@
 package com.example.kuka.moviestorm.activity.adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.media.Image;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,6 +16,7 @@ import com.example.kuka.moviestorm.R;
 import com.example.kuka.moviestorm.activity.activity.MainActivity;
 import com.example.kuka.moviestorm.activity.fragment.MovieDetailFragment;
 import com.example.kuka.moviestorm.activity.model.Movie;
+import com.example.kuka.moviestorm.activity.utilities.FavListHelper;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -54,6 +57,43 @@ public class WatchListAdapter extends RecyclerView.Adapter<WatchListAdapter.View
             }
         });
 
+        holder.movieWatchListImage.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MainActivity.activity);
+                // alert dialog başlığını tanımlıyoruz.
+//                alertDialogBuilder.setTitle();
+
+                // alert dialog özelliklerini oluşturuyoruz.
+                alertDialogBuilder
+                        .setMessage(article.title + " filmini listenizden kaldırmak istiyor musunuz?")
+                        .setCancelable(false)
+                        .setIcon(R.mipmap.ic_launcher_round)
+                        // Evet butonuna tıklanınca yapılacak işlemleri buraya yazıyoruz.
+                        .setPositiveButton("Evet", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                FavListHelper.removeFromFav(article);
+                            }
+                        })
+                        // İptal butonuna tıklanınca yapılacak işlemleri buraya yazıyoruz.
+                        .setNegativeButton("Hayır", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+
+                // alert dialog nesnesini oluşturuyoruz
+                AlertDialog alertDialog = alertDialogBuilder.create();
+
+                // alerti gösteriyoruz
+                alertDialog.show();
+
+                return true;
+            }
+        });
+
     }
 
     @Override
@@ -70,7 +110,7 @@ public class WatchListAdapter extends RecyclerView.Adapter<WatchListAdapter.View
         public ViewHolder(View itemView) {
             super(itemView);
             movieWatchListTitle = (TextView) itemView.findViewById(R.id.movieWatchListTitle);
-            movieWatchListImage=(ImageView) itemView.findViewById(R.id.movieWatchListImage);
+            movieWatchListImage = (ImageView) itemView.findViewById(R.id.movieWatchListImage);
             ButterKnife.bind(this, itemView);
 
         }

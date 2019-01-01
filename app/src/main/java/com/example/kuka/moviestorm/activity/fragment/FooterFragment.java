@@ -57,7 +57,7 @@ public class FooterFragment extends Fragment {
                         MainActivity.activity.setNewFragment(new WatchListFragment(), R.id.contentFL, "", false, false, false, false);
                         break;
                     case R.id.search:
-                        MainActivity.activity.setNewFragment(new SearchFragment(), R.id.contentFL, "", false, false, false, false);
+                        MainActivity.activity.setNewFragment(new SearchFragment(), R.id.contentFL, "", true, true, false, false);
                         break;
                 }
                 return true;
